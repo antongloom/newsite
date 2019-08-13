@@ -7,8 +7,5 @@
 	
 </script>
 <style lang="stylus" scoped>
-	.MainLayout
-		display flex
-		height 100%
-		background red
+
 </style>

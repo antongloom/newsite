@@ -1,6 +1,6 @@
 <template>
 	<div class="LoginLayout">
-		<div class="LoginLayout-Content">
+		<div class="LoginLayout-Content Main-Content">
 			<div class="LoginLayout-Title">Домашняя бухгалтерия</div>
 			<form class="LoginLayout-Block">
 				<div class="LoginLayout-BlockInput">
