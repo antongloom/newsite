@@ -8,7 +8,6 @@
 </script>
 <style lang="stylus" scoped>
 	.EmptyLayout
-		display flex
-		height 100%
+		height 100vh
 		background #ccc
 </style>
