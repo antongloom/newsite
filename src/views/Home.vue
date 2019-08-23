@@ -1,25 +1,9 @@
 <template>
   <div class="Home">
 		<div class="Home-Content">
-	    <div class="Home-Header">
-	    	<div class="Home-Btn">
-	    		<div class="Home-Img">
-	    			<img src="@/assets/images/menu.svg" alt="Icon">
-	    		</div>
-	    		<div class="Home-Time">12.12.12</div>
-	    	</div>
-	    	<div class="Home-User">User Name <img src="@/assets/images/arrow-top.png" alt="Icon"></div>
-	    </div>
+	    <Navbar />
 	    <div class="Home-Item">
-	    	<div class="Home-Sidebar">
-	    		<ul class="Home-List">
-	    			<li>Счет</li>
-	    			<li>История</li>
-	    			<li>Планирование</li>
-	    			<li>Новая запись</li>
-	    			<li>Категории</li>
-	    		</ul>
-	    	</div>
+	    	<Sidebar />
 	    	<div class="Home-Info">
 	    		<div class="Home-Title">
 	    			<div class="Home-Text">Счет</div>
@@ -55,9 +39,14 @@
 </template>
 
 <script>
-
+import Navbar from '@/components/app/Navbar'
+import Sidebar from '@/components/app/Sidebar'
 export default {
-  name: 'home'
+  name: 'home',
+  components: {
+		Navbar,
+		Sidebar
+	}
 }
 </script>
 
@@ -91,32 +80,8 @@ export default {
 				margin-left 5px
 		&-Item
 			display flex
+			justify-content space-between
 			padding-top 67px
-			justify-content: space-between;
-		&-Sidebar
-			width 400px
-			-webkit-box-shadow: 9px 0px 8px -5px rgba(0,0,0,0.19);
-			-moz-box-shadow: 9px 0px 8px -5px rgba(0,0,0,0.19);
-			box-shadow: 9px 0px 8px -5px rgba(0,0,0,0.19);
-			height: 100vh;
-			margin-right 35px
-		&-Info
-			width 100%
-			padding 30px 15px 0px 15px
-		&-List
-			margin-top 30px
-			li
-				list-style-type none
-				color #000
-				font-weight bold
-				font-size 18px
-				padding 10px 15px
-				cursor pointer
-				-webkit-transition all 0.5s ease
-				-moz-transition all 0.3s ease
-				transition all 0.3s ease
-				&:hover
-					background #ddd
 		&-Title
 			display flex
 			justify-content space-between
@@ -135,6 +100,9 @@ export default {
 			text-align center
 			line-height 30px
 			cursor pointer
+		&-Info
+			width 100%
+			padding 30px 15px 0px 15px
 		&-InfoBlock
 			display flex
 			justify-content space-between
