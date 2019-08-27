@@ -1,11 +1,16 @@
 <template>
 	<div class="Sidebar">
 		<ul class="Sidebar-List">
-			<li>Счет</li>
-			<li>История</li>
-			<li>Планирование</li>
-			<li>Новая запись</li>
-			<li>Категории</li>
+			<router-link 
+			  v-for="link in links"
+			  :key = "link.url"
+				tag="li"
+				active-class="active"
+				:to="link.url"
+				:exact="link.exact"
+				>
+				{{link.title}}
+			</router-link>
 		</ul>
 	 </div>
 </template>
@@ -33,4 +38,46 @@
 			transition all 0.3s ease
 			&:hover
 				background #ddd
+
+.active{
+	background #ddd
+}
+
+@media (max-width: 992px){
+	.Sidebar{
+		width: 230px;
+		background: #fff;
+		position: absolute;
+	}
+}
 </style>
+
+<script>
+	export default {
+		data: () => ({
+			links: [
+				{
+					title: 'Счет',
+					url: '/',
+					exact: true
+				},
+				{
+					title: 'История',
+					url: '/history'
+				},
+				{
+					title: 'Планирование',
+					url: '/planning'
+				},
+				{
+					title: 'Новая запись',
+					url: '/record'
+				},
+				{
+					title: 'Категории',
+					url: '/categories'
+				}
+			]
+		})
+	}
+</script>

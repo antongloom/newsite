@@ -1,5 +1,5 @@
 <template>
-  <div class="Home">
+  <div class="Home Main-Content">
   		<div class="Home-Title">
   			<div class="Home-Text">Счет</div>
   			<div class="Home-Update">&#8634;</div>
@@ -30,20 +30,8 @@
   </div>
 </template>
 
-<script>
-import Sidebar from '@/components/app/Sidebar'
-export default {
-  name: 'home',
-  components: {
-		Sidebar
-	}
-}
-</script>
-
 <style lang="stylus" scoped>
 	.Home
-		width 100%
-		padding 30px 15px 0px 15px
 		&-Title
 			display flex
 			justify-content space-between
@@ -116,3 +104,14 @@ export default {
 }
 
 </style>
+
+
+<script>
+import Sidebar from '@/components/app/Sidebar'
+export default {
+  name: 'home',
+  components: {
+		Sidebar
+	}
+}
+</script>

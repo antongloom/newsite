@@ -1,6 +1,6 @@
 <template>
-	<div>
-		2
+	<div class="Categorie Main-Content">
+		Categorie
 		<router-view />
 	</div>
 </template>

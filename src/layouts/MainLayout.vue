@@ -1,9 +1,11 @@
 <template>
 	<div class="MainLayout">
 		<div class="MainLayout-Content">
-			<Navbar />
+			<Navbar @menu="onClick" />
 			<div class="MainLayout-Item">
-				<Sidebar />
+				<transition name="fade">
+					<Sidebar v-if="show"/>
+				</transition>
 				<router-view />	
 			</div>
 		</div>
@@ -20,6 +22,18 @@
 			display flex
 			justify-content space-between
 			padding-top 67px
+
+.fade-enter-active {
+  transition: all .2s ease;
+}
+.fade-leave-active {
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.fade-enter, .fade-leave-to {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
 </style>
 
 <script>
@@ -27,9 +41,17 @@ import Navbar from '@/components/app/Navbar'
 import Sidebar from '@/components/app/Sidebar'
 export default {
   name: 'main-layout',
+  data: () => ({
+  	show: false
+  }),
   components: {
 		Navbar,
 		Sidebar
+	},
+	methods: {
+		onClick() {
+			this.show = !this.show
+		}
 	}
 }	
 </script>

@@ -2,7 +2,7 @@
 	<div class="Navbar">
 		<div class="Navbar-Header">
 	  	<div class="Navbar-Btn">
-	  		<div class="Navbar-Img">
+	  		<div class="Navbar-Img" @click="Menu">
 	  			<img src="@/assets/images/menu.svg" alt="Icon">
 	  		</div>
 	  		<div class="Navbar-Time">12.12.12</div>
@@ -36,6 +36,18 @@
 			margin-left 15px
 		&-User
 			text-transform uppercase
+			cursor pointer
 			img
 				margin-left 5px
+				vertical-align middle				
 </style>
+
+<script>
+	export default {
+		methods: {
+			Menu() {
+				this.$emit('menu') 
+			}
+		}
+	}
+</script>
