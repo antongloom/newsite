@@ -7,7 +7,13 @@
 	  		</div>
 	  		<div class="Navbar-Time">12.12.12</div>
 	  	</div>
-	  	<div class="Navbar-User">User Name <img src="@/assets/images/arrow-top.png" alt="Icon"></div>
+	  	<div @click="showInfo" class="Navbar-User">User Name <img src="@/assets/images/arrow-top.png" alt="Icon"></div>
+	  	<div v-if="info" class="Navbar-Info">
+	  		<ul class="Navbar-InfoText">
+	  			<li>Профиль</li>
+	  			<li>Выйти</li>
+	  		</ul>
+	  	</div>
   	</div>
   </div>
 </template>
@@ -27,6 +33,7 @@
 			left 0px
 			right 0px
 			z-index 100
+			position relative
 		&-Btn
 			display flex
 			align-items center
@@ -39,14 +46,37 @@
 			cursor pointer
 			img
 				margin-left 5px
-				vertical-align middle				
+				vertical-align middle
+		&-Info
+			position absolute
+			right 15px
+			top 55px
+		&-InfoText
+			background #fff
+			-webkit-box-shadow 0px 0px 15px -5px rgba(0,0,0,0.75)
+			-moz-box-shadow 0px 0px 15px -5px rgba(0,0,0,0.75)
+			box-shadow 0px 0px 15px -5px rgba(0,0,0,0.75)
+			padding 15px 15px 5px 15px
+			li
+				margin-bottom 10px
+				font-size 18px
+				cursor pointer
+
+
+
 </style>
 
 <script>
 	export default {
+		data: () => ({
+			info: false
+		}),
 		methods: {
 			Menu() {
 				this.$emit('menu') 
+			},
+			showInfo() {
+				this.info = !this.info
 			}
 		}
 	}
