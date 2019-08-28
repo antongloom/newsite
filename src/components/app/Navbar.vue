@@ -5,13 +5,15 @@
 	  		<div class="Navbar-Img" @click="Menu">
 	  			<img src="@/assets/images/menu.svg" alt="Icon">
 	  		</div>
-	  		<div class="Navbar-Time">12.12.12</div>
+	  		<div class="Navbar-Time">{{date | date}}</div>
 	  	</div>
 	  	<div @click="showInfo" class="Navbar-User">User Name <img src="@/assets/images/arrow-top.png" alt="Icon"></div>
 	  	<div v-if="info" class="Navbar-Info">
 	  		<ul class="Navbar-InfoText">
-	  			<li>Профиль</li>
-	  			<li>Выйти</li>
+	  			<li>
+	  				<router-link to="/profile">Профиль</router-link>
+	  			</li>
+	  			<li @click="logout">Выйти</li>
 	  		</ul>
 	  	</div>
   	</div>
@@ -69,7 +71,9 @@
 <script>
 	export default {
 		data: () => ({
-			info: false
+			info: false,
+			date: new Date(),
+			interval: null
 		}),
 		methods: {
 			Menu() {
@@ -77,7 +81,19 @@
 			},
 			showInfo() {
 				this.info = !this.info
+			},
+			logout() {
+				console.log('Logout')
+				this.$router.push('/login?message=logout')
 			}
+		},
+		mounted() {
+			this.interval = setInterval(() => {
+				this.date = new Date()	
+			}, 1000) 
+		},
+		beforeDestroy() {
+			clearInterval(this.interval)
 		}
 	}
 </script>

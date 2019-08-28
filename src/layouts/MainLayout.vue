@@ -21,7 +21,6 @@
 		&-Item
 			display flex
 			justify-content space-between
-			padding-top 67px
 
 .fade-enter-active {
   transition: all .2s ease;

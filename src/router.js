@@ -43,6 +43,12 @@ export default new Router({
       name: 'Record',
       meta: {layout: 'main'},
       component: () => import('./views/Record.vue')
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      meta: {layout: 'main'},
+      component: () => import('./views/Profile.vue')
     }
   ]
 })
