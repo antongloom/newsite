@@ -1,19 +1,19 @@
 <template>
-	<div class="LoginLayout">
-		<div class="LoginLayout-Content Main-Content">
-			<div class="LoginLayout-Title">Домашняя бухгалтерия</div>
-			<form class="LoginLayout-Block">
-				<div class="LoginLayout-BlockInput">
-					<input type="text" placeholder="Email" class="LoginLayout-Input">
-					<span class="LoginLayout-Error">Email</span>
+	<div class="Login">
+		<div class="Login-Content Main-Content">
+			<div class="Login-Title">Домашняя бухгалтерия</div>
+			<form class="Login-Block">
+				<div class="Login-BlockInput">
+					<input type="text" placeholder="Email" class="Login-Input">
+					<span class="Login-Error">Email</span>
 				</div>
-				<div class="LoginLayout-BlockInput">
-					<input type="text" placeholder="Пароль" class="LoginLayout-Input">
-					<span class="LoginLayout-Error">Пароль</span>
+				<div class="Login-BlockInput">
+					<input type="text" placeholder="Пароль" class="Login-Input">
+					<span class="Login-Error">Пароль</span>
 				</div>
-				<button	type="submit" class="LoginLayout-Btn">войти</button>
+				<button	type="submit" class="Login-Btn">войти</button>
 			</form>
-			<div class="LoginLayout-Text">Нет аккаунта? <span>Зарегестрироваться</span></div>	
+			<div class="Login-Text">Нет аккаунта? <router-link to='/registration'><span> Зарегестрироваться</span></router-link></div>	
 		</div>
 		<router-view />
 	</div>
@@ -21,12 +21,12 @@
 
 </script>
 <style lang="stylus" scoped>
-	.LoginLayout
+	.Login
 		&-Content
 			box-sizing border-box
-			width 450px
-			padding 20px
-			margin 0
+		  width 450px
+		  padding 20px
+		  margin 0
 		  background #fff
 		  position absolute
 		  top 50%
@@ -41,7 +41,7 @@
 			font-size 24px
 			padding-bottom 20px
 		&-BlockInput
-			padding-bottom 45px
+			padding-bottom 30px
 		&-Input
 			width 100%
 			height 35px
@@ -65,6 +65,7 @@
 			line-height 35px
 			color #fff
 			cursor pointer
+			border-radius 2px
 		&-Text
 			text-align center
 			font-size 14px
@@ -74,11 +75,15 @@
 				cursor pointer
 
 
+
+
+
+
 @media (max-width: 480px){
-	.LoginLayout-Content {
+	.Login-Content {
 		width: 100%;
 	}
-	.LoginLayout-Content {
+	.Login-Content {
 		font-size: 20px;
 	}
 }

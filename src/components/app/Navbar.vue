@@ -5,7 +5,7 @@
 	  		<div class="Navbar-Img" @click="Menu">
 	  			<img src="@/assets/images/menu.svg" alt="Icon">
 	  		</div>
-	  		<div class="Navbar-Time">{{date | date}}</div>
+	  		<div class="Navbar-Time">{{date | date('datetime')}}</div>
 	  	</div>
 	  	<div @click="showInfo" class="Navbar-User">User Name <img src="@/assets/images/arrow-top.png" alt="Icon"></div>
 	  	<div v-if="info" class="Navbar-Info">
