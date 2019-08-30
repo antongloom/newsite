@@ -2,22 +2,56 @@
 	<div class="Registration">
 		<div class="Registration-Content Main-Content">
 			<div class="Registration-Title">Домашняя бухгалтерия</div>
-			<form class="Registration-Block">
+			<form class="Registration-Block" @submit.prevent="submitHandler">
 				<div class="Registration-BlockInput">
-					<input type="text" placeholder="Email" class="Registration-Input">
-					<span class="Registration-Error">Email</span>
+					<input type="text" 
+								 placeholder="Email" 
+								 class="Registration-Input"
+								 v-model.trim="email"
+								 :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
+								 >
+					<span class="Registration-Error"
+								v-if="$v.email.$dirty && !$v.email.required"
+							>
+							Поле Email не должно быть пустым
+					</span>
+					<span class="Registration-Error"
+								v-if="$v.email.$dirty && !$v.email.email"
+							>
+							Введите корректный Email
+					</span>	
 				</div>
 				<div class="Registration-BlockInput">
-					<input type="text" placeholder="Пароль" class="Registration-Input">
-					<span class="Registration-Error">Пароль</span>
+					<input type="password" 
+								 placeholder="Пароль" 
+								 class="Registration-Input"
+								 v-model.trim="password"
+								 :class="{invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}"
+								 >
+					<span class="Registration-Error"
+								v-if="$v.password.$dirty && !$v.password.required">
+								Введите пароль
+					</span>
+					<span class="Registration-Error"
+								v-if="$v.password.$dirty && !$v.password.minLength">
+								Пароль должен быть {{$v.password.$params.minLength.min}} символов. Сейчас он {{password.length}} 
+					</span>
 				</div>
 				<div class="Registration-BlockInput">
-					<input type="text" placeholder="Имя" class="Registration-Input">
-					<span class="Registration-Error">Имя</span>
+					<input type="text" 
+								 placeholder="Имя" 
+								 class="Registration-Input"
+								 v-model.trim="name"
+								 :class="{invalid: ($v.name.$dirty && !$v.name.required)}"
+								 >
+					<span class="Registration-Error"
+								v-if="$v.name.$dirty && !$v.name.required">
+								Введите ваше имя
+					</span>
 				</div>
 				<div class="Registration-Checkbox">
 					<div>
-				    <input type="checkbox" id="check" name="check" />
+				    <input type="checkbox" v-model="agree" id="check"  />
 				    <label for="check"> С правилами согласен</label>
 					</div>
 				</div>
@@ -34,9 +68,9 @@
 	.Registration
 		&-Content
 			box-sizing border-box
-			width 450px
-			padding 20px
-			margin 0
+		  width 450px
+		  padding 20px
+		  margin 0
 		  background #fff
 		  position absolute
 		  top 50%
@@ -52,6 +86,8 @@
 			padding-bottom 20px
 		&-BlockInput
 			padding-bottom 30px
+			position relative
+			margin-bottom 25px
 		&-Checkbox
 			margin-top -10px
 			margin-bottom 20px
@@ -68,6 +104,9 @@
 		&-Error
 			color red
 			font-size 12px
+			position absolute
+			left 0
+			top 45px
 		&-Btn
 			margin-top 15px
 			width 100%
@@ -117,3 +156,39 @@ input[type=checkbox]:checked + label:before {
 	}
 }
 </style>
+
+
+<script>
+import {email, required, minLength} from 'vuelidate/lib/validators'
+
+export default {
+  name: 'Registration',
+  data: () => ({
+    email: '',
+    password: '',
+    name: '',
+    agree: false
+  }),
+  validations: {
+    email: {email, required},
+    password: {required, minLength: minLength(8)},
+    name: {required},
+    agree: {chacked: v => v}
+  },
+  methods: {
+    submitHandler() {
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+        return
+      }
+      const formData = {
+      	email: this.email,
+      	password: this.password,
+      	name: this.name
+      }
+      console.log(formData)
+      this.$router.push('/')
+    }
+  }
+}
+</script>

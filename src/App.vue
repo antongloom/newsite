@@ -5,6 +5,11 @@
   	</component>
   </div>
 </template>
+<style lang="stylus">
+@import 'assets/style/main.styl'
+
+</style>
+
 <script>
 import EmptyLayout from '@/layouts/EmptyLayout'
 import MainLayout from '@/layouts/MainLayout'
@@ -20,7 +25,3 @@ export default {
 	}
 }
 </script>
-<style lang="stylus">
-@import 'assets/style/main.styl'
-
-</style>

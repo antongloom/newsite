@@ -2,14 +2,40 @@
 	<div class="Login">
 		<div class="Login-Content Main-Content">
 			<div class="Login-Title">Домашняя бухгалтерия</div>
-			<form class="Login-Block">
+			<form class="Login-Block" @submit.prevent="submitHandler">
 				<div class="Login-BlockInput">
-					<input type="text" placeholder="Email" class="Login-Input">
-					<span class="Login-Error">Email</span>
+					<input type="text" 
+								 placeholder="Email" 
+								 class="Login-Input"
+								 v-model.trim="email"
+								 :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
+								 >
+					<span class="Login-Error"
+								v-if="$v.email.$dirty && !$v.email.required"
+							>
+							Поле Email не должно быть пустым
+					</span>
+					<span class="Login-Error"
+								v-if="$v.email.$dirty && !$v.email.email"
+							>
+							Введите корректный Email
+					</span>	
 				</div>
 				<div class="Login-BlockInput">
-					<input type="text" placeholder="Пароль" class="Login-Input">
-					<span class="Login-Error">Пароль</span>
+					<input type="password" 
+								 placeholder="Пароль" 
+								 class="Login-Input"
+								 v-model.trim="password"
+								 :class="{invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}"
+								 >
+					<span class="Login-Error"
+								v-if="$v.password.$dirty && !$v.password.required">
+								Введите пароль
+					</span>
+					<span class="Login-Error"
+								v-if="$v.password.$dirty && !$v.password.minLength">
+								Пароль должен быть {{$v.password.$params.minLength.min}} символов. Сейчас он {{password.length}} 
+					</span>
 				</div>
 				<button	type="submit" class="Login-Btn">войти</button>
 			</form>
@@ -42,6 +68,8 @@
 			padding-bottom 20px
 		&-BlockInput
 			padding-bottom 30px
+			position relative
+			margin-bottom 25px
 		&-Input
 			width 100%
 			height 35px
@@ -55,6 +83,9 @@
 		&-Error
 			color red
 			font-size 12px
+			position absolute
+			left 0
+			top 45px
 		&-Btn
 			margin-top 15px
 			width 100%
@@ -74,10 +105,9 @@
 				color #DAA520
 				cursor pointer
 
-
-
-
-
+.invalid{
+	border-bottom: 1px solid red;
+}
 
 @media (max-width: 480px){
 	.Login-Content {
@@ -88,3 +118,38 @@
 	}
 }
 </style>
+
+
+<script>
+import {email, required, minLength} from 'vuelidate/lib/validators'
+
+
+export default {
+  name: 'login',
+  data: () => ({
+    email: '',
+    password: ''
+  }),
+  validations: {
+    email: {email, required},
+    password: {required, minLength: minLength(8)}
+  },
+  methods: {
+    submitHandler() {
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+        return
+      }
+      const formData = {
+      	email: this.email,
+      	password: this.password
+      }
+      console.log(formData)
+      this.$router.push('/')
+    }
+  },
+  mounted() {
+  	this.$message('Успешный вход')
+  }
+}
+</script>
