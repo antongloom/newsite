@@ -149,7 +149,7 @@ export default {
     }
   },
   mounted() {
-  	this.$message('Успешный вход')
+  	this.$message('Вы вышли из системы')
   }
 }
 </script>

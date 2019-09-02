@@ -9,7 +9,7 @@ export default {
 			div.innerHTML = value
 
 			document.body.append(div);
-			setTimeout(() => div.remove(), 10000)
+			setTimeout(() => div.remove(), 1000000)
 			
 			
 		}
