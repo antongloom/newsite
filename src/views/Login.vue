@@ -48,6 +48,7 @@
 </script>
 <style lang="stylus" scoped>
 	.Login
+		box-sizing: border-box;
 		&-Content
 			box-sizing border-box
 		  width 450px
@@ -109,11 +110,12 @@
 	border-bottom: 1px solid red;
 }
 
-@media (max-width: 480px){
-	.Login-Content {
-		width: 100%;
+@media (max-width: 500px){
+	.Login {
+		width: 300px;
+		padding: 0px 0px 20px 0px;
 	}
-	.Login-Content {
+	.Login-Title {
 		font-size: 20px;
 	}
 }
@@ -132,10 +134,10 @@ export default {
   }),
   validations: {
     email: {email, required},
-    password: {required, minLength: minLength(8)}
+    password: {required, minLength: minLength(6)}
   },
   methods: {
-    submitHandler() {
+    async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
@@ -144,8 +146,10 @@ export default {
       	email: this.email,
       	password: this.password
       }
-      console.log(formData)
-      this.$router.push('/')
+       try{
+       	await this.$store.dispatch('login', formData)
+	  	this.$router.push('/')	
+       } catch(e){}
     }	
   },
   mounted() {

@@ -147,11 +147,12 @@ input[type=checkbox]:checked + label:before {
 }
 
 
-@media (max-width: 480px){
-	.Registration-Content {
-		width: 100%;
+@media (max-width: 500px){
+	.Registration {
+		width: 300px;
+		padding: 0px 0px 20px 0px;
 	}
-	.Registration-Content {
+	.Registration-Title {
 		font-size: 20px;
 	}
 }
@@ -171,12 +172,12 @@ export default {
   }),
   validations: {
     email: {email, required},
-    password: {required, minLength: minLength(8)},
+    password: {required, minLength: minLength(6)},
     name: {required},
     agree: {chacked: v => v}
   },
   methods: {
-    submitHandler() {
+    async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
@@ -186,8 +187,12 @@ export default {
       	password: this.password,
       	name: this.name
       }
-      console.log(formData)
-      this.$router.push('/')
+
+      try {
+      	await this.$store.dispatch('register', formData)
+	  	this.$router.push('/')
+      } catch(e){}
+      
     }
   }
 }
