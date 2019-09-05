@@ -7,7 +7,7 @@
 	  		</div>
 	  		<div class="Navbar-Time">{{date | date('datetime')}}</div>
 	  	</div>
-	  	<div @click="showInfo" class="Navbar-User">User Name <img src="@/assets/images/arrow-top.png" alt="Icon"></div>
+	  	<div @click="showInfo" class="Navbar-User">{{name}}<img src="@/assets/images/arrow-top.png" alt="Icon"></div>
 	  	<div v-if="info" class="Navbar-Info">
 	  		<ul class="Navbar-InfoText">
 	  			<li>
@@ -85,6 +85,11 @@
 			async logout() {
 				await this.$store.dispatch('logout')
 				this.$router.push('/login?message=logout')
+			}
+		},
+		computed: {
+			name() {
+				return this.$store.getters.info.name
 			}
 		},
 		mounted() {

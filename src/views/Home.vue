@@ -5,27 +5,8 @@
   			<div class="Home-Update">&#8634;</div>
   		</div>
   		<div class="Home-InfoBlock">
-  			<div class="Home-Price">
-  				<div class="Home-Subtitle">Счет в валюте</div>
-  				<div class="Home-PriceNumber">12.0 <span>Р</span></div>
-  			</div>
-  			<div class="Home-Price Home-Price_Left">
-  				<div class="Home-Subtitle">Курс валют</div>
-  				<div class="Home-PriceText Home-PriceText_Title">
-  					<ul>
-  						<li>Валюта</li>
-  						<li>Курс</li>
-  						<li>Дата</li>
-  					</ul>
-  				</div>
-  				<div class="Home-PriceText">
-  					<ul>
-  						<li>руб</li>
-  						<li>12121</li>
-  						<li>12.12.12</li>
-  					</ul>
-  				</div>
-  			</div>
+  			<HomeBill />
+  			<HomeCurrency />
   		</div>
   </div>
 </template>
@@ -53,33 +34,6 @@
 		&-InfoBlock
 			display flex
 			justify-content space-between
-		&-Price
-			width 30%
-			background #1E90FF
-			border-radius 3px
-			box-sizing border-box
-			color #fff
-			padding 20px 20px 40px 20px
-			&_Left
-				width 67%
-				background #FF8C00
-		&-Subtitle
-			padding-bottom 20px
-			font-size 20px
-		&-PriceNumber
-			padding 10px 0px 10px 0px
-			border-bottom 1px solid #fff
-		&-PriceText
-			ul
-				display flex
-				justify-content space-between
-				border-bottom 1px solid #fff
-				padding 10px 0px
-				li
-					list-style-type none
-					width 33.33%
-			&_Title
-				font-weight bold
 
 @media (max-width: 768px){
 	.Home-InfoBlock {
@@ -103,15 +57,20 @@
 	}
 }
 
-</style>
+</style>	
 
 
 <script>
 import Sidebar from '@/components/app/Sidebar'
+import HomeBill from '@/components/HomeBill'
+import HomeCurrency from '@/components/HomeCurrency'
+
 export default {
   name: 'home',
   components: {
-		Sidebar
+		Sidebar,
+		HomeBill,
+		HomeCurrency
 	}
 }
 </script>
