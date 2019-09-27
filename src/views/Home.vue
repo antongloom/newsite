@@ -2,12 +2,16 @@
   <div class="Home Main-Content">
   		<div class="Home-Title">
   			<div class="Home-Text">Счет</div>
-  			<div class="Home-Update">&#8634;</div>
+  			<div class="Home-Update" @click="Refresh">&#8634;</div>
   		</div>
-  		<div class="Home-InfoBlock">
-  			<HomeBill />
-  			<HomeCurrency />
+  		<Loader v-if="loading" />
+  		<div v-else class="Home-InfoBlock">
+  			<HomeBill :rates = currency.rates />
+  			<HomeCurrency :rates = currency.rates
+						  :date = "currency.date"
+  			 />
   		</div>
+  		<div class="loader"></div>
   </div>
 </template>
 
@@ -18,6 +22,8 @@
 			justify-content space-between
 			align-items center
 			padding-bottom 20px
+			border-bottom 1px solid #000
+			margin-bottom 30px
 		&-Text
 			font-size 24px
 		&-Update
@@ -67,10 +73,25 @@ import HomeCurrency from '@/components/HomeCurrency'
 
 export default {
   name: 'home',
+  data: () => ({
+  	loading: true,
+  	currency: null
+  }),
+  async mounted() {
+  	this.currency =  await this.$store.dispatch('fetchCarrency')
+  	this.loading = false
+  },
   components: {
 		Sidebar,
 		HomeBill,
 		HomeCurrency
+	},
+	methods: {
+		async Refresh() {
+			this.loading = true
+			this.currency =  await this.$store.dispatch('fetchCarrency')
+			this.loading = false
+		}
 	}
 }
 </script>

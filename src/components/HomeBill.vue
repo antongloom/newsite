@@ -1,7 +1,10 @@
 <template>
 	<div class="Home-Price">
 		<div class="Home-Subtitle">Счет в валюте</div>
-		<div class="Home-PriceNumber">12.0 <span>Р</span></div>
+		<div class="Home-PriceNumber" 
+				 v-for="cur in currencies"	
+				 :key="cur"
+				 ><span>{{ getCurrency(cur) | currency(cur) }}</span></div>
 	</div>
 </template>
 
@@ -35,3 +38,24 @@
 			&_Title
 				font-weight bold
 </style>
+
+
+
+<script>
+export default {
+  props: ['rates'],
+  data: () => ({
+    currencies: ['RUB', 'USD', 'EUR']
+  }),
+  computed: {
+    base() {
+      return this.$store.getters.info.bill / (this.rates['RUB'] / this.rates['EUR'])
+    }
+  },
+  methods: {
+    getCurrency(currency) {
+      return Math.floor(this.base * this.rates[currency])
+    }
+  }
+}
+</script>

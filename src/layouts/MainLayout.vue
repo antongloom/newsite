@@ -1,5 +1,6 @@
 <template>
-	<div class="MainLayout">
+	<Loader v-if="loading"/>
+	<div v-else class="MainLayout">
 		<div class="MainLayout-Content">
 			<Navbar @menu="onClick" />
 			<div class="MainLayout-Item">
@@ -41,7 +42,8 @@ import Sidebar from '@/components/app/Sidebar'
 export default {
   name: 'main-layout',
   data: () => ({
-  	show: false
+  	show: false,
+  	loading: true
   }),
   components: {
 		Navbar,
@@ -56,6 +58,7 @@ export default {
 		if(!Object.keys(this.$store.getters.info).length) {
 			await this.$store.dispatch('fetchInfo')
 		}
+		this.loading = false
 	}
 }	
 </script>

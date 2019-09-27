@@ -9,10 +9,10 @@
 				</ul>
 			</div>
 			<div class="Home-PriceText">
-				<ul>
-					<li>руб</li>
-					<li>12121</li>
-					<li>12.12.12</li>
+				<ul v-for="cur in currencies" :key="cur">
+					<li>{{cur}}</li>
+					<li>{{rates[cur].toFixed(5)}}</li>
+					<li>{{date}}</li>
 				</ul>
 			</div>
 		</div>
@@ -45,3 +45,12 @@
 		&_Title
 			font-weight bold
 </style>
+
+<script>
+	export default {
+		props: ['rates','date'],
+		data: () => ({
+			currencies: ['RUB', 'USD', 'EUR']
+		})
+	}
+</script>

@@ -70,7 +70,7 @@
 		&-BlockInput
 			padding-bottom 30px
 			position relative
-			margin-bottom 25px
+			margin-bottom 10px
 		&-Input
 			width 100%
 			height 35px
